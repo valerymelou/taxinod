@@ -1,0 +1,49 @@
+{
+  "name": "api",
+  "projectType": "application",
+  "sourceRoot": "apps/api",
+  "prefix": "",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash -c 'python manage.py check'",
+        "cwd": "apps/api"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash -c 'pip install -r requirements/local.txt'",
+        "cwd": "apps/api"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash -c 'python manage.py runserver'",
+        "cwd": "apps/api"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash -c 'flake8'",
+        "cwd": "apps/api"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands":[
+          {
+            "command": "bash -c 'coverage run -m pytest && coverage xml'",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/api"
+      }
+    }
+  },
+  "tags": []
+}

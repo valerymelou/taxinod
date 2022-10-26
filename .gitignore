@@ -37,3 +37,34 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+.angular
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+staticfiles/
+.pytest_cache
+__pycache__
+*.pyc
+.coverage
+coverage.xml
+media
+
+# celery beat schedule file
+celerybeat-schedule
+
+# mypy
+.mypy_cache/
+
+# Coverage directory used by tools like istanbul
+coverage
+
+### Project template
+apps/api/media/
+
+# Environment
+.env
+env
