@@ -35,7 +35,7 @@
     "test": {
       "executor": "nx:run-commands",
       "options": {
-        "commands":[
+        "commands": [
           {
             "command": "bash -c 'coverage run -m pytest && coverage xml'",
             "forwardAllArgs": false
