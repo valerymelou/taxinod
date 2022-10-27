@@ -49,7 +49,7 @@ jobs:
             apps/api/requirements/base.txt
             apps/api/requirements/local.txt
 
-      - uses: nrwl/nx-set-shas@v2
+      - uses: nrwl/nx-set-shas@v3
         with:
           main-branch-name: develop
 
