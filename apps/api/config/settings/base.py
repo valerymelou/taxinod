@@ -75,7 +75,9 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "taxinod.users.apps.UsersConfig",
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -261,3 +263,5 @@ SPECTACULAR_SETTINGS = {
         {"url": "https://taxinod.com", "description": "Production server"},
     ],
 }
+
+AUTH_USER_MODEL = "users.User"
