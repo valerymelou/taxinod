@@ -12,7 +12,7 @@ urlpatterns = [
 # API URLS
 urlpatterns += [
     # API base url
-    path("", include("config.api_router"))
+    path("v1/", include("config.api_router"))
 ]
 
 if settings.DEBUG:

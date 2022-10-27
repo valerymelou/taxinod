@@ -262,10 +262,16 @@ LOGGING = {
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication"
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_FILTER_BACKENDS": ("rest_framework.filters.SearchFilter",),
+    "PAGE_SIZE": 10,
+    "DEFAULT_VERSION": "v1",
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.AcceptHeaderVersioning",
+    "ALLOWED_VERSIONS": ("v1",),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
