@@ -35,7 +35,7 @@
     "@nrwl/linter": "15.0.3",
     "@nrwl/workspace": "14.7.5",
     "@types/jasmine": "~4.0.0",
-    "@types/node": "16.11.7",
+    "@types/node": "18.11.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "autoprefixer": "^10.4.0",
