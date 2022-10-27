@@ -24,8 +24,22 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "UTC"
+
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
+def gettext(s):
+    """
+    :param s:
+    :return:
+    """
+    return s
+
+
 LANGUAGE_CODE = "en-us"
+LANGUAGES = (
+    ("fr", gettext("Français")),
+    ("en", gettext("English")),
+)
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -46,6 +60,7 @@ DATABASES = {
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -66,6 +81,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "modeltranslation",
     "django.contrib.admin",
     "django.forms",
 ]
@@ -73,10 +89,14 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
     "drf_spectacular",
+    "mapwidgets",
 ]
 
 LOCAL_APPS = [
+    "taxinod.core.apps.CoreConfig",
     "taxinod.users.apps.UsersConfig",
+    "taxinod.localization.apps.LocalizationConfig",
+    "taxinod.taxi.apps.TaxiConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -265,3 +285,17 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "users.User"
+
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "yaounde"),
+        (
+            "GooglePlaceAutocompleteOptions",
+            {"componentRestrictions": {"country": "cm"}},
+        ),
+        ("markerFitZoom", 12),
+        ("streetViewControl", True),
+    ),
+    "GOOGLE_MAP_API_KEY": env.str("GOOGLE_MAPS_API_KEY", ""),
+}
