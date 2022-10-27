@@ -1,10 +1,10 @@
-from django.conf import settings
-from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.routers import DefaultRouter
 
-if settings.DEBUG:
-    router = DefaultRouter()
-else:
-    router = SimpleRouter()
+from taxinod.taxi.api.viewsets import TaxiStopViewSet
+
+router = DefaultRouter()
+
+router.register("stops", TaxiStopViewSet, basename="taxi-stop")
 
 app_name = "api"
 urlpatterns = router.urls
