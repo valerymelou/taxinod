@@ -40,7 +40,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "autoprefixer": "^10.4.0",
     "eslint": "~8.15.0",
-    "eslint-config-prettier": "8.1.0",
+    "eslint-config-prettier": "8.5.0",
     "jasmine-core": "~4.2.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.4.0",
