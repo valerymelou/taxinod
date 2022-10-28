@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
@@ -14,8 +16,14 @@
         "polyfills": "apps/web/src/polyfills.ts",
         "tsConfig": "apps/web/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/web/src/favicon.ico", "apps/web/src/assets"],
-        "styles": ["apps/web/src/styles.scss"],
+        "assets": [
+          "apps/web/src/favicon.ico",
+          "apps/web/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/web/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -72,7 +80,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/web/**/*.ts", "apps/web/**/*.html"]
+        "lintFilePatterns": [
+          "apps/web/**/*.ts",
+          "apps/web/**/*.html"
+        ]
       }
     },
     "test": {
@@ -82,7 +93,9 @@
         "tsConfig": "apps/web/tsconfig.spec.json",
         "karmaConfig": "apps/web/karma.conf.js",
         "polyfills": "apps/web/src/polyfills.ts",
-        "styles": [],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
         "scripts": [],
         "assets": []
       }
