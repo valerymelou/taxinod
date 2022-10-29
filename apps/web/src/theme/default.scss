@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+@import "core";
+@import "variables";
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($default-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+@include mat.button-theme($default-theme);
+@include mat.toolbar-theme($default-theme);

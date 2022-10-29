@@ -1,0 +1,29 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer #drawer [mode]="'over'" [autoFocus]="false">
+    <mat-toolbar color="accent">
+      <button mat-icon-button color="primary" (click)="drawer.toggle()" aria-label="Close menu">
+        <mat-icon aria-hidden="true" fontIcon="close"></mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="p-4 bg-accent">
+      <img src="/assets/images/logo-inverted.svg" alt="Taxinod's logo" width="100%">
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <header>
+      <mat-toolbar color="primary">
+        <button mat-icon-button color="accent" (click)="drawer.toggle()" aria-label="Toggle menu">
+          <mat-icon aria-hidden="true" fontIcon="menu"></mat-icon>
+        </button>
+        <a href="/" class="flex">
+          <img src="/assets/images/logo.svg" alt="Taxinod's logo" height="36">
+        </a>
+        <div class="ml-auto">
+          <button mat-icon-button color="accent" aria-label="Help">
+            <mat-icon aria-hidden="true" fontIcon="help"></mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+    </header>
+  </mat-drawer-content>
+</mat-drawer-container>
