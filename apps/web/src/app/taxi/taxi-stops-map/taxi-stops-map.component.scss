@@ -1,0 +1,11 @@
+.map {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 64px;
+
+  @media (max-width: 599px) {
+    top: 56px;
+  }
+}

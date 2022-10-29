@@ -18,3 +18,8 @@ getTestBed().initTestEnvironment(
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+// Required for using process.env in tests
+(window as any).process = {
+  env: { DEBUG: undefined },
+};
