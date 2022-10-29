@@ -3,3 +3,60 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Background utilities
+.bg-accent {
+  background-color: $primary-color;
+}
+
+// Flex utilities
+// -----------------------------------------------------------------------------
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+// Dimensions utilities
+.h-screen {
+  min-height: 100vh;
+}
+
+
+// Spacing utilities
+// -----------------------------------------------------------------------------
+.ml-auto {
+  margin-left: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+
+// Text utilities
+// -----------------------------------------------------------------------------
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+
+// Material drawer
+mat-drawer {
+  width: 250px;
+  top: 0;
+  bottom: 0;
+}
+
+mat-drawer-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
