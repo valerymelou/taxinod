@@ -11,7 +11,7 @@
   </mat-drawer>
   <mat-drawer-content>
     <header>
-      <mat-toolbar color="primary">
+      <mat-toolbar color="primary" class="fixed">
         <button mat-icon-button color="accent" (click)="drawer.toggle()" aria-label="Toggle menu">
           <mat-icon aria-hidden="true" fontIcon="menu"></mat-icon>
         </button>
@@ -24,6 +24,9 @@
           </button>
         </div>
       </mat-toolbar>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
     </header>
   </mat-drawer-content>
 </mat-drawer-container>
