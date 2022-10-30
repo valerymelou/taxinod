@@ -4,15 +4,10 @@ $accent: mat.define-palette(mat.$yellow-palette, 700);
 // The "warn" palette is optional and defaults to red if not specified.
 $warn: mat.define-palette(mat.$red-palette);
 
-$default-typography: mat.define-typography-config(
-  $font-family: Roboto,
-);
-
 $default-theme: mat.define-light-theme((
  color: (
    primary: $primary,
    accent: $accent,
    warn: $warn,
- ),
- typography: $default-typography
+ )
 ));

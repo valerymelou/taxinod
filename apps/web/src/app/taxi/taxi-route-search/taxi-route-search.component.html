@@ -1,0 +1,64 @@
+<div [ngClass]="{'z-30 fixed sm:sticky top-0 sm:top-16 right-0 left-0 sm:right-auto': active, 'sticky': !active}" class="flex flex-col bg-white rounded-md shadow-lg w-full sm:w-96">
+  <form [formGroup]="form" spellcheck="false" class="flex flex-col p-4" #formEl>
+    <div [ngClass]="{'flex': active, 'block': !active}">
+      <button mat-icon-button aria-label="Back" *ngIf="active" (click)="deactivate()">
+        <mat-icon aria-hidden="true" fontIcon="arrow_back_ios"></mat-icon>
+      </button>
+      <div class="flex flex-col flex-grow">
+        <div class="text-xs">
+          <mat-form-field class="w-full">
+            <mat-label class="text-sm">Find the price of a taxi from</mat-label>
+            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm">
+            <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value" aria-label="Clear">
+              <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
+            </button>
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (opened)="activate()">
+              <mat-option *ngFor="let option of fromStops$ | async" [value]="option">
+                {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div *ngIf="form.get('from')?.value" class="text-xs">
+          <mat-form-field class="w-full">
+            <mat-label class="text-sm">To</mat-label>
+            <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm">
+            <button matSuffix (click)="clearField('to', $event)" *ngIf="form.get('to')?.value" aria-label="Clear">
+              <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
+            </button>
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSubmit()">
+              <ng-container *ngFor="let option of toStops$ | async">
+                <mat-option *ngIf="true" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </ng-container>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="active && hasResults" class="flex">
+      <button mat-flat-button [color]="form.get('mode')?.value === 'car' ? 'accent' : ''" class="!min-w-0 !px-2 !mr-4" (click)="setMode('car')" aria-label="Cars only">
+        <mat-icon aria-hidden="true" fontIcon="local_taxi"></mat-icon>
+      </button>
+      <button mat-flat-button [color]="form.get('mode')?.value === 'moto' ? 'accent' : ''" class="!min-w-0 !px-2 !mr-4" (click)="setMode('moto')" aria-label="Motorcycles only">
+        <mat-icon aria-hidden="true" fontIcon="motorcycle"></mat-icon>
+      </button>
+      <button mat-flat-button [color]="form.get('mode')?.value === 'any' ? 'accent' : ''" class="!min-w-0 !px-2" (click)="setMode('any')" aria-label="Any type of transportation">
+        <mat-icon aria-hidden="true" fontIcon="local_taxi"></mat-icon>
+        <span class="ml-1">|</span>
+        <mat-icon aria-hidden="true" fontIcon="motorcycle"></mat-icon>
+      </button>
+      <button mat-flat-button [color]="displayMode === 'list' ? 'accent' : ''" class="!min-w-0 !px-2 !ml-auto" (click)="setDisplayMode('list')" aria-label="Show the list">
+        <mat-icon aria-hidden="true" fontIcon="list"></mat-icon>
+      </button>
+      <button mat-flat-button [color]="displayMode === 'map' ? 'accent' : ''" class="!min-w-0 !px-2" (click)="setDisplayMode('map')" aria-label="Show the map">
+        <mat-icon aria-hidden="true" fontIcon="map"></mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
+<div class="fixed sm:relative left-0 right-0 bottom-0 overflow-auto bg-white px-4 w-full sm:w-96" [ngStyle]="{'top': mobileQuery.matches ? formEl.clientHeight + 'px' : '0'}" *ngIf="active && hasResults && displayMode === 'list'">
+  <app-taxi-stops-results></app-taxi-stops-results>
+</div>

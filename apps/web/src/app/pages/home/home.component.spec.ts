@@ -9,13 +9,19 @@ import { HomeComponent } from './home.component';
 })
 export class TaxiStopsMapStubComponent {}
 
+@Component({
+  selector: 'app-taxi-route-search',
+  template: 'app taxi route search works!'
+})
+export class TaxiRouteSearchStubComponent {}
+
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent, TaxiStopsMapStubComponent],
+      declarations: [HomeComponent, TaxiStopsMapStubComponent, TaxiRouteSearchStubComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);

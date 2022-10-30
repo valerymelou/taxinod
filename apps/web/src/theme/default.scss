@@ -10,3 +10,6 @@
 // emit any typography styles.
 @include mat.button-theme($default-theme);
 @include mat.toolbar-theme($default-theme);
+@include mat.form-field-theme($default-theme);
+@include mat.autocomplete-theme($default-theme);
+@include mat.input-theme($default-theme);

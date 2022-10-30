@@ -1,60 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-@import "./theme/default.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* You can add global styles to this file, and also import other style files */
+@import './theme/default.scss';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 // Background utilities
 .bg-accent {
   background-color: $primary-color;
 }
-
-// Flex utilities
-// -----------------------------------------------------------------------------
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-// Dimensions utilities
-.h-screen {
-  min-height: 100vh;
-}
-
-// Position utilities
-.fixed {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-
-// Spacing utilities
-// -----------------------------------------------------------------------------
-.ml-auto {
-  margin-left: auto;
-}
-
-.mt-auto {
-  margin-top: auto;
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-
-// Text utilities
-// -----------------------------------------------------------------------------
-.text-uppercase {
-  text-transform: uppercase;
-}
-
 
 // Material drawer
 mat-drawer {
