@@ -1,5 +1,5 @@
-<div *ngIf="mapReady" class="map">
-  <google-map height="100%" width="100%" [options]="options" class="outline-none">
+<div *ngIf="mapReady" class="">
+  <google-map height="100%" width="100%" [options]="options" class="outline-none fixed top-0 bottom-0 left-0 right-0 sm:top-14">
     <map-marker
       #marker="mapMarker"
       *ngFor="let markerPosition of markerPositions; let i = index"
