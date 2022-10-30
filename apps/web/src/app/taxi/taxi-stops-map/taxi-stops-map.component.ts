@@ -5,8 +5,7 @@ import { TaxiStop } from '../taxi-stop';
 
 @Component({
   selector: 'app-taxi-stops-map',
-  templateUrl: './taxi-stops-map.component.html',
-  styleUrls: ['./taxi-stops-map.component.scss'],
+  templateUrl: './taxi-stops-map.component.html'
 })
 export class TaxiStopsMapComponent implements OnInit {
   mapReady = false;
@@ -15,7 +14,10 @@ export class TaxiStopsMapComponent implements OnInit {
     zoom: 12,
     mapTypeControl: false,
     streetViewControl: false,
-    scrollwheel: false
+    scrollwheel: false,
+    fullscreenControlOptions: {
+      position: 6
+    }
   };
   markerPositions: google.maps.LatLngLiteral[] = [];
   markerOptions: google.maps.MarkerOptions[] = [];

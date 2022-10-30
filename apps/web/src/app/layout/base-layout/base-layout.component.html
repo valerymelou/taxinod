@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="true">
+<mat-drawer-container [hasBackdrop]="true">
   <mat-drawer #drawer [mode]="'over'" [autoFocus]="false">
     <mat-toolbar color="accent">
       <button mat-icon-button color="primary" (click)="drawer.toggle()" aria-label="Close menu">
@@ -11,12 +11,12 @@
   </mat-drawer>
   <mat-drawer-content>
     <header>
-      <mat-toolbar color="primary" class="fixed">
+      <mat-toolbar color="primary" class="fixed z-10">
         <button mat-icon-button color="accent" (click)="drawer.toggle()" aria-label="Toggle menu">
           <mat-icon aria-hidden="true" fontIcon="menu"></mat-icon>
         </button>
         <a href="/" class="flex">
-          <img src="/assets/images/logo.svg" alt="Taxinod's logo" height="36">
+          <img src="/assets/images/logo.svg" alt="Taxinod's logo" height="36" class="max-w-none h-9">
         </a>
         <div class="ml-auto">
           <button mat-icon-button color="accent" aria-label="Help">
