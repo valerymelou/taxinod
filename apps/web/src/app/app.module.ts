@@ -9,7 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { TaxiModule } from './taxi/taxi.module';
 import { PagesModule } from './pages/pages.module';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpBaseUrlInterceptor } from './core/http/http-base-url.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,13 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     TaxiModule,
     PagesModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpBaseUrlInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

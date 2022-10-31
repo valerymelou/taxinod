@@ -8,11 +8,14 @@
         <div class="text-xs">
           <mat-form-field class="w-full">
             <mat-label class="text-sm">Find the price of a taxi from</mat-label>
-            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm">
+            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" class="text-sm" #searchFrom>
             <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (opened)="activate()">
+              <mat-option [value]="defaultStop" *ngIf="!searchFrom.value">
+                <mat-icon aria-hidden="true" fontIcon="my_location"></mat-icon> {{ defaultStop.name }}
+              </mat-option>
               <mat-option *ngFor="let option of fromStops$ | async" [value]="option">
                 {{option.name}}
               </mat-option>
@@ -22,13 +25,13 @@
         <div *ngIf="form.get('from')?.value" class="text-xs">
           <mat-form-field class="w-full">
             <mat-label class="text-sm">To</mat-label>
-            <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm">
+            <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm" (input)="searchToOptions(searchTo.value)" #searchTo>
             <button matSuffix (click)="clearField('to', $event)" *ngIf="form.get('to')?.value" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSubmit()">
               <ng-container *ngFor="let option of toStops$ | async">
-                <mat-option *ngIf="true" [value]="option">
+                <mat-option *ngIf="option.id !== form.get('from')?.value?.id" [value]="option">
                   {{option.name}}
                 </mat-option>
               </ng-container>
