@@ -11,7 +11,7 @@ class TaxiStopSerializer(ModelSerializer):
 
     class Meta:
         model = TaxiStop
-        fields = ("name", "city", "state", "latitude", "longitude", "address")
+        fields = ("id", "name", "city", "state", "latitude", "longitude", "address")
 
     def get_city(self, obj):
         return obj.city.name
