@@ -35,7 +35,7 @@
     "@angular/language-service": "~14.2.0",
     "@nrwl/cli": "15.0.3",
     "@nrwl/eslint-plugin-nx": "15.0.4",
-    "@nrwl/linter": "15.0.3",
+    "@nrwl/linter": "15.0.4",
     "@nrwl/workspace": "14.7.5",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^18.11.7",
