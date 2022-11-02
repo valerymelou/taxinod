@@ -1,6 +1,10 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import (
+    ModelSerializer,
+    Serializer,
+    SerializerMethodField,
+)
 
-from ..models import TaxiStop
+from ..models import TaxiRoute, TaxiStop
 
 
 class TaxiStopSerializer(ModelSerializer):
@@ -24,3 +28,30 @@ class TaxiStopSerializer(ModelSerializer):
 
     def get_longitude(self, obj):
         return obj.coordinates.x
+
+
+class TaxiRouteSerializer(ModelSerializer):
+    origin = TaxiStopSerializer()
+    destination = TaxiStopSerializer()
+
+    class Meta:
+        model = TaxiRoute
+        fields = (
+            "origin",
+            "destination",
+            "mode",
+            "std_price",
+            "night_price",
+            "jam_price",
+            "hurry_price",
+            "rain_price",
+            "notes",
+            "modified",
+        )
+
+
+class TaxiResultsSerializer(Serializer):
+    routes = TaxiRouteSerializer(many=True)
+
+    class Meta:
+        fields = ("routes",)

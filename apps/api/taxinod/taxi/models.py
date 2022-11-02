@@ -39,6 +39,9 @@ class TaxiStop(AuditableModel):
     def __str__(self):
         return self.name
 
+    def __eq__(self, o):
+        return o.id == self.id
+
 
 class TaxiRoute(AuditableModel):
     """
@@ -99,3 +102,6 @@ class TaxiRoute(AuditableModel):
 
     def __str__(self):
         return f"{self.origin} - {self.destination}: {self.std_price}"
+
+    def __eq__(self, o):
+        return o.id == self.id
