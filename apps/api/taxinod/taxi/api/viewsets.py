@@ -32,20 +32,22 @@ class TaxiSearchView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        mode = request.GET.get("mode", TaxiRoute.TaxiMode.CAR)
+        mode = request.GET.get("mode", None)
         data = []
+        queryset = TaxiRoute.objects.filter(is_active=True)
+
+        if mode:
+            queryset = queryset.filter(mode=mode)
 
         try:
-            route = TaxiRoute.objects.get(
-                is_active=True, origin=origin, destination=destination, mode=mode
-            )
+            route = queryset.get(is_active=True, origin=origin, destination=destination)
             path = Path()
             path.routes = [route]
             data.append(path)
         except TaxiRoute.DoesNotExist:
             pass
 
-        routes = TaxiRoute.objects.filter(
+        routes = queryset.filter(
             Q(is_active=True), Q(origin=origin) | Q(destination=destination)
         ).distinct()
 

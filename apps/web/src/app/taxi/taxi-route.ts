@@ -1,5 +1,9 @@
 import { TaxiStop } from "./taxi-stop";
 
 export interface TaxiRoute {
-  stops: TaxiStop[];
+  origin: TaxiStop;
+  destination: TaxiStop;
+  notes: string;
+  std_price: number;
+  mode: number;
 }

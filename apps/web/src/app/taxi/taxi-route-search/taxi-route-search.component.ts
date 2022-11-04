@@ -1,10 +1,17 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, map, Observable, of, Subject, switchMap } from 'rxjs';
+import { Path } from '../path';
 import { Results } from '../results';
+import { TaxiSearchService } from '../taxi-search.service';
 import { TaxiStop } from '../taxi-stop';
 import { TaxiStopService } from '../taxi-stop.service';
+
+const MODES: {[key: string]: number} = {
+  'car': 1,
+  'moto': 2
+};
 
 @Component({
   selector: 'app-taxi-route-search',
@@ -30,13 +37,20 @@ export class TaxiRouteSearchComponent implements OnInit {
 
   active = false;
   hasResults = false;
+  loading = false;
 
   displayMode: 'list'|'map' = 'list';
 
   searchFrom$ = new Subject<string>();
   searchTo$ = new Subject<string>();
+  paths$!: Observable<Path[]>;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private taxiStopService: TaxiStopService) {
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private taxiStopService: TaxiStopService,
+    private taxiSearchService: TaxiSearchService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 640px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
@@ -64,6 +78,7 @@ export class TaxiRouteSearchComponent implements OnInit {
 
   onSubmit(): void {
     this.hasResults = true;
+    this.search();
   }
 
   setMode(mode: 'car'|'moto'|'any'): void {
@@ -115,6 +130,23 @@ export class TaxiRouteSearchComponent implements OnInit {
           })
         );
       })
+    );
+  }
+
+  private search(): void {
+    const filters: {[key: string]: string|number} = {
+      from: this.form.value.from?.id ? this.form.value.from?.id : '',
+      to: this.form.value.to?.id ? this.form.value.to?.id : '',
+    }
+
+    if (this.form.value.mode && this.form.value.mode !== 'any') {
+      filters['mode'] = MODES[this.form.value.mode];
+    }
+
+
+    this.loading = true;
+    this.paths$ = this.taxiSearchService.search(filters).pipe(
+      finalize(() => this.loading = false)
     );
   }
 }

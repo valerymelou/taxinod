@@ -26,14 +26,27 @@ describe('TaxiMapService', () => {
   });
 
   it('should emit taxi routes', () => {
-    const routes: TaxiRoute[] = [{
-      stops: []
+    const expectedRoutes: TaxiRoute[] = [{
+      origin: {
+        id: '1',
+        name: 'Neptune Tropicana',
+        longitude: 1,
+        latitude: 1
+      },
+      destination: {
+        id: '1',
+        name: 'Central Post',
+        longitude: 1,
+        latitude: 1
+      },
+      std_price: 300,
+      notes: '',
+      mode: 1
     }];
-    service.getRoutes().subscribe((businesses: TaxiRoute[]) => {
-      expect(businesses).toEqual(businesses);
+    service.update(expectedRoutes);
+    service.getRoutes().subscribe((routes: TaxiRoute[]) => {
+      expect(routes).toEqual(expectedRoutes);
     });
-
-    service.update(routes);
   });
 
   it('should initialise the map (http client called once)', () => {
