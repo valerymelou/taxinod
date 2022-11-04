@@ -1,1 +1,36 @@
-<p>taxi stop results works!</p>
+<div *ngFor="let path of paths; let i = index;">
+  <div class="my-4 font-bold text-xs uppercase">
+    <p *ngIf="path.routes.length === 1" class="flex items-center">
+      <span>Direct route</span>
+      <span class="ml-auto text-sm">{{ totalCost(path)|currency:'XAF' }}</span>
+    </p>
+    <p *ngIf="path.routes.length !== 1" class="flex items-center">
+      <span>alternative - {{ path.routes.length - 1 }}</span>
+      <span *ngIf="path.routes.length === 2">stop</span>
+      <span *ngIf="path.routes.length === 3">stops</span>
+      <span class="ml-auto text-sm">{{ totalCost(path)|currency:'XAF' }}</span>
+    </p>
+  </div>
+  <div class="pb-4 border-b border-gray-300">
+    <div class="mt-4" *ngFor="let route of path.routes; let i = index;">
+      <hr class="my-4 border-b border-1 border-dashed max-w ml-12" *ngIf="i !== 0">
+      <div class="flex items-center">
+        <div class="pl-2 pr-4">
+          <mat-icon fontIcon="local_taxi"></mat-icon>
+        </div>
+        <div class="flex flex-col text-sm mr-3">
+          <p class="mb-4 before:inline-block before:mr-2 before:w-3 before:h-3 before:border-2 before:rounded-full" [ngClass]="{'before:border-accent': i !== 0, 'before:border-gray-400': i === 0}">{{ route.origin.name }}</p>
+          <p class="before:inline-block before:mr-2 before:w-3 before:h-3 before:border-2 before:rounded-full" [ngClass]="{'before:border-accent': i === 0, 'before:border-gray-400': i !== 0}">{{ route.destination.name }}</p>
+        </div>
+        <div class="ml-auto">
+          <strong class="text-xs text-gray-500">{{ route.std_price | currency:'XAF' }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="paths.length === 0" class="flex flex-col py-10 items-center text-gray-500">
+  <mat-icon fontIcon="not_listed_location"></mat-icon>
+  <p class="mt-4">No routes found for your query.</p>
+</div>

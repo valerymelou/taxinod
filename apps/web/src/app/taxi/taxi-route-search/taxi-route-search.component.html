@@ -1,4 +1,4 @@
-<div [ngClass]="{'z-30 fixed sm:sticky top-0 sm:top-16 right-0 left-0 sm:right-auto': active, 'sticky': !active}" class="flex flex-col bg-white rounded-md shadow-lg w-full sm:w-96">
+<div [ngClass]="{'z-30 fixed sm:sticky top-0 sm:top-16 right-0 left-0 sm:right-auto': active, 'sticky': !active}" class="flex flex-col bg-white rounded-t-md shadow-md w-full sm:w-96">
   <form [formGroup]="form" spellcheck="false" class="flex flex-col p-4" #formEl>
     <div [ngClass]="{'flex': active, 'block': !active}">
       <button mat-icon-button aria-label="Back" *ngIf="active" (click)="deactivate()">
@@ -62,6 +62,12 @@
     </div>
   </form>
 </div>
-<div class="fixed sm:relative left-0 right-0 bottom-0 overflow-auto bg-white px-4 w-full sm:w-96" [ngStyle]="{'top': mobileQuery.matches ? formEl.clientHeight + 'px' : '0'}" *ngIf="active && hasResults && displayMode === 'list'">
-  <app-taxi-stops-results></app-taxi-stops-results>
+<div class="fixed sm:relative left-0 right-0 bottom-0 rounded-b-md overflow-auto shadow-md bg-white px-4 pb-10 w-full sm:w-96" [ngStyle]="{'top': mobileQuery.matches ? formEl.clientHeight + 'px' : '0'}" *ngIf="active && hasResults && displayMode === 'list'">
+  <app-taxi-stops-results *ngIf="paths$ | async as paths" [paths]="paths"></app-taxi-stops-results>
+  <div *ngIf="loading" class="py-10">
+    <span class="flex m-auto h-12 w-12 relative">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-12 w-12 bg-white-"></span>
+    </span>
+  </div>
 </div>

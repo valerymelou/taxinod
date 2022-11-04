@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -8,7 +8,9 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
+import { Path } from '../path';
 import { Results } from '../results';
+import { TaxiSearchService } from '../taxi-search.service';
 import { TaxiStop } from '../taxi-stop';
 import { TaxiStopService } from '../taxi-stop.service';
 
@@ -18,12 +20,15 @@ import { TaxiRouteSearchComponent } from './taxi-route-search.component';
   selector: 'app-taxi-stops-results',
   template: 'app taxi stops results works'
 })
-class TaxiStopsResultsStubComponent {}
+class TaxiStopsResultsStubComponent {
+  @Input() paths: Path[] = [];
+}
 
 describe('TaxiRouteSearchComponent', () => {
   let component: TaxiRouteSearchComponent;
   let fixture: ComponentFixture<TaxiRouteSearchComponent>;
   let taxiStopServiceSpy: jasmine.SpyObj<TaxiStopService>;
+  let taxiSearchServiceSpy: jasmine.SpyObj<TaxiSearchService>;
   const stops: Results<TaxiStop> = {
     count: 1,
     next: null,
@@ -40,6 +45,7 @@ describe('TaxiRouteSearchComponent', () => {
 
   beforeEach(async () => {
     const taxiStopServiceMock = jasmine.createSpyObj('TaxiStopService', ['getList']);
+    const taxiSearchServiceMock = jasmine.createSpyObj('TaxiSearchService', ['search']);
 
     await TestBed.configureTestingModule({
       declarations: [TaxiRouteSearchComponent, TaxiStopsResultsStubComponent],
@@ -52,7 +58,8 @@ describe('TaxiRouteSearchComponent', () => {
         SharedModule,
       ],
       providers: [
-        { provide: TaxiStopService, useValue: taxiStopServiceMock }
+        { provide: TaxiStopService, useValue: taxiStopServiceMock },
+        { provide: TaxiSearchService, useValue: taxiSearchServiceMock }
       ]
     }).compileComponents();
 
@@ -61,7 +68,9 @@ describe('TaxiRouteSearchComponent', () => {
     fixture.detectChanges();
 
     taxiStopServiceSpy = TestBed.inject(TaxiStopService) as jasmine.SpyObj<TaxiStopService>;
+    taxiSearchServiceSpy = TestBed.inject(TaxiSearchService) as jasmine.SpyObj<TaxiSearchService>;
     taxiStopServiceSpy.getList.and.returnValue(of(stops));
+    taxiSearchServiceSpy.search.and.returnValue(of([]));
   });
 
   it('should create', () => {
