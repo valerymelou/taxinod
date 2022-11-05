@@ -4,7 +4,7 @@ Taxinod is an open source platform to find the cheapest taxi routes to a destina
 
 Built with Python, Django, TypeScript and Angular.
 
-[![codecov](https://codecov.io/gh/valerymelou/taxinod/branch/master/graph/badge.svg?token=8XJD8VPN9F)](https://codecov.io/gh/valerymelou/taxinod) [![CI](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml/badge.svg)](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/valerymelou/taxinod/branch/develop/graph/badge.svg?token=8XJD8VPN9F)](https://codecov.io/gh/valerymelou/taxinod) [![CI](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml/badge.svg)](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml)
 
 ## Project overview
 
