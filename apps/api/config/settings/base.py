@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+import os
 from pathlib import Path
 
 import environ
@@ -80,6 +81,7 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     # "django.contrib.humanize", # Handy template tags
     "modeltranslation",
     "django.contrib.admin",
@@ -307,3 +309,9 @@ MAP_WIDGETS = {
     ),
     "GOOGLE_MAP_API_KEY": env.str("GOOGLE_MAPS_API_KEY", ""),
 }
+
+# On windows we need to install GDAL with virtualenv for the spatial features to work.
+# Make sure to do so and define the values in your .env
+if os.name == "nt":
+    GDAL_LIBRARY_PATH = env.str("GDAL_LIBRARY_PATH", "")
+    GEOS_LIBRARY_PATH = env.str("GEOS_LIBRARY_PATH", "")
