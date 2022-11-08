@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Q
 from django.utils.translation import gettext_lazy as _
+
 from taxinod.core.models import AuditableModel
 from taxinod.localization.models import City
 
