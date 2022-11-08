@@ -32,7 +32,7 @@
     "@angular-eslint/template-parser": "~14.1.2",
     "@angular/cli": "~14.2.0",
     "@angular/compiler-cli": "~14.2.0",
-    "@angular/language-service": "~14.2.0",
+    "@angular/language-service": "~14.2.9",
     "@nrwl/cli": "15.0.3",
     "@nrwl/eslint-plugin-nx": "15.0.4",
     "@nrwl/linter": "15.0.4",
