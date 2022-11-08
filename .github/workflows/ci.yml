@@ -65,7 +65,7 @@ jobs:
             npx nx affected --target=build --parallel=3
 
       - name: Code Coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
