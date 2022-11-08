@@ -1,20 +1,47 @@
 """
 Base settings to build other settings files upon.
 """
+import io
 import os
 from pathlib import Path
 
 import environ
+import google
+from google.cloud import secretmanager
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # taxinod/
 APPS_DIR = ROOT_DIR / "taxinod"
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
-if READ_DOT_ENV_FILE:
-    # OS environment variables take precedence over variables from .env
-    env.read_env(str(ROOT_DIR / ".env"))
+# SECURITY WARNING: don't run with debug turned on in production!
+# Change this to "False" when you are ready for production
+env_file = os.path.join(ROOT_DIR, ".env")
+
+# Attempt to load the Project ID into the environment, safely failing on error.
+try:
+    _, os.environ["GOOGLE_CLOUD_PROJECT"] = google.auth.default()
+except google.auth.exceptions.DefaultCredentialsError:
+    pass
+
+if os.path.isfile(env_file):
+    # Use a local secret file, if provided
+
+    env.read_env(env_file)
+# ...
+elif os.environ.get("GOOGLE_CLOUD_PROJECT", None):
+    # Pull secrets from Secret Manager
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")
+
+    client = secretmanager.SecretManagerServiceClient()
+    settings_name = os.environ.get("SETTINGS_NAME", "django_settings")
+    name = f"projects/{project_id}/secrets/{settings_name}/versions/latest"
+    payload = client.access_secret_version(name=name).payload.data.decode("UTF-8")
+
+    env.read_env(io.StringIO(payload))
+else:
+    raise Exception("No local .env or GOOGLE_CLOUD_PROJECT detected. No secrets found.")
+
 
 # GENERAL
 # ------------------------------------------------------------------------------
