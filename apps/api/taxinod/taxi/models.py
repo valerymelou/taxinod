@@ -1,7 +1,6 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Q
 from django.utils.translation import gettext_lazy as _
-
 from taxinod.core.models import AuditableModel
 from taxinod.localization.models import City
 
@@ -40,7 +39,10 @@ class TaxiStop(AuditableModel):
         return self.name
 
     def __eq__(self, o):
-        return o.id == self.id
+        if hasattr(o, "id") and hasattr(self, "id"):
+            return o.id == self.id
+
+        return super().__eq__(o)
 
 
 class TaxiRoute(AuditableModel):
@@ -104,4 +106,7 @@ class TaxiRoute(AuditableModel):
         return f"{self.origin} - {self.destination}: {self.std_price}"
 
     def __eq__(self, o):
-        return o.id == self.id
+        if hasattr(o, "id") and hasattr(self, "id"):
+            return o.id == self.id
+
+        return super().__eq__(o)
