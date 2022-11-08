@@ -4,7 +4,7 @@ Taxinod is an open source platform to find the cheapest taxi routes to a destina
 
 Built with Python, Django, TypeScript and Angular.
 
-[![codecov](https://codecov.io/gh/valerymelou/taxinod/branch/develop/graph/badge.svg?token=8XJD8VPN9F)](https://codecov.io/gh/valerymelou/taxinod) [![CI](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml/badge.svg)](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/valerymelou/taxinod/branch/master/graph/badge.svg?token=8XJD8VPN9F)](https://codecov.io/gh/valerymelou/taxinod) [![CI](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml/badge.svg)](https://github.com/valerymelou/taxinod/actions/workflows/ci.yml)
 
 ## Project overview
 ### Project goal
@@ -43,31 +43,31 @@ Before starting, please make sure you have the following available on your compu
 1. [Fork](https://github.com/valerymelou/taxinod) this repository.
 2. In your terminal, clone your fork:
 
-`git clone <link to your fork>`
+```git clone <link to your fork>```
 
 3. Navigate to the project directory:
 
-`cd taxinod`
+```cd taxinod```
 
 4. Install dependencies for the mono repo tooling and the frontend:
 
-`yarn install`
+```yarn install```
 
 5. Create a Python virtual environment:
 
-`python -m venv <virtual env path>`
+```python -m venv <virtual env path>```
 
 6. Activate the virtual env you just created:
 
-`source <virtual env path>/bin/activate`
+```source <virtual env path>/bin/activate```
 
 7. Install python dependencies:
 
-`pip install -r requirements/local.txt`
+```pip install -r requirements/local.txt```
 
 8. Create a new PostreSQL database using [createdb](https://www.postgresql.org/docs/current/static/app-createdb.html)
 
-`createdb --username=postgres taxinod`
+```createdb --username=postgres taxinod```
 
 9. Setup the environment variables
 

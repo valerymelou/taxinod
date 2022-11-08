@@ -50,7 +50,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v2
         with:
-          main-branch-name: develop
+          main-branch-name: master
 
       - run: yarn install
       - run: npx nx affected --target=install --parallel=3
