@@ -26,8 +26,8 @@ def createsuperuser(apps: StateApps, schema_editor: DatabaseSchemaEditor) -> Non
             "UTF-8"
         )
 
-    # Create a new user using acquired password, stripping any accidentally stored newline characters
-    get_user_model().objects.create_superuser("admin@taxinod.com", password=admin_password.strip())
+        # Create a new user using acquired password, stripping any accidentally stored newline characters
+        get_user_model().objects.create_superuser("admin@taxinod.com", password=admin_password.strip())
 
 def deletesuperuser(apps, schema_editor):
     if os.environ.get("GOOGLE_CLOUD_PROJECT", None):
