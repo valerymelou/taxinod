@@ -70,3 +70,20 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
           fail_ci_if_error: false
+
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    env:
+      NX_API_ROOT: '${{ secrets.API_ROOT }}'
+      NX_API_VERSION: '${{ secrets.API_VERSION }}'
+      NX_GOOGLE_MAPS_API_KEY: '${{ secrets.GOOGLE_MAPS_API_KEY }}'
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install && npx nx build web --configuration production --skip-nx-cache
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAXINOD_367919 }}'
+          channelId: live
+          projectId: taxinod-367919
