@@ -74,6 +74,5 @@ Before starting, please make sure you have the following available on your compu
 Create a `.env` file at the root of the project with the following environment variables defined in it:
 ```
 DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/taxinod
-CELERY_BROKER_URL=redis://localhost:6379/0
 NX_GOOGLE_MAPS_API_KEY=<your Google Maps API key>
 ```
