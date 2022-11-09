@@ -48,7 +48,7 @@ jobs:
             apps/api/requirements/base.txt
             apps/api/requirements/local.txt
 
-      - uses: nrwl/nx-set-shas@v2
+      - uses: nrwl/nx-set-shas@v3
         with:
           main-branch-name: master
 
@@ -65,7 +65,7 @@ jobs:
             npx nx affected --target=build --parallel=3
 
       - name: Code Coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
