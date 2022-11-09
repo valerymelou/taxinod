@@ -6,16 +6,9 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
 on:
-  push:
-    branches: [ "master" ]
+  workflow_call:
     paths:
       - "apps/web/**"
-      - "apps/libs/**"
-  pull_request:
-    branches: [ "master" ]
-    paths:
-      - "apps/web/**"
-      - "apps/libs/**"
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}

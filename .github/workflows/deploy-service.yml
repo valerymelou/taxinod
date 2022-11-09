@@ -1,0 +1,43 @@
+name: "CI Service"
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+on:
+  workflow_call:
+    paths:
+      - "apps/api/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: test
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v2
+      - id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: taxinod-service
+          region: ${{ secrets.GCP_DEPLOY_REGION }}
+          image: gcr.io/taxinod-367919/taxinod-service
+
+      - name: Build Image
+        run: |
+          gcloud builds submit --config cloudmigrate.yaml
+        working-directory: ./apps/api
