@@ -79,9 +79,9 @@ jobs:
   deploy_service:
     if: ${{ github.event_name != 'pull_request' }}
     needs: test
-    uses: valerymelou/taxinod/.github/workflows/deploy-service.yml@develop
+    uses: valerymelou/taxinod/.github/workflows/deploy-service.yml@master
 
   deploy_webapp:
     if: ${{ github.event_name != 'pull_request' }}
     needs: test
-    uses: valerymelou/taxinod/.github/workflows/deploy-webapp.yml@develop
+    uses: valerymelou/taxinod/.github/workflows/deploy-webapp.yml@master
