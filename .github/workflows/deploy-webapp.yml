@@ -7,8 +7,6 @@ env:
 
 on:
   workflow_call:
-    paths:
-      - "apps/web/**"
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -18,7 +16,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' }}
-    needs: test
     env:
       NX_API_ROOT: ${{ secrets.API_ROOT }}
       NX_API_VERSION: ${{ secrets.API_VERSION }}
