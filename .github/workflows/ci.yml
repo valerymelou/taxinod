@@ -91,16 +91,17 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Build Image'
-        run: |
-          gcloud builds submit --config cloudmigrate.yaml --substitutions _INSTANCE_NAME=${{ secrets.GCP_SQL_INSTANCE_NAME }} _REGION=europe-central2
-        working-directory: ./apps/api
-
       - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: 'taxinod-service'
           image: 'gcr.io/taxinod-367919/taxinod-service'
+
+      - name: 'Build Image'
+        run: |
+          ls -als
+          gcloud builds submit --config cloudmigrate.yaml --substitutions _INSTANCE_NAME=${{ secrets.GCP_SQL_INSTANCE_NAME }} _REGION=europe-central2
+        working-directory: ./apps/api
 
 
   build_and_deploy_webapp:
