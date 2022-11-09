@@ -101,7 +101,7 @@ jobs:
       - name: 'Build Image'
         run: |
           ls -als
-          gcloud builds submit --config cloudmigrate.yaml --substitutions _INSTANCE_NAME=${{ secrets.GCP_SQL_INSTANCE_NAME }} _REGION=${{ secrets.GCP_REGION }}
+          gcloud builds submit . --config cloudmigrate.yaml --substitutions _INSTANCE_NAME=${{ secrets.GCP_SQL_INSTANCE_NAME }} _REGION=${{ secrets.GCP_REGION }}
         working-directory: ./apps/api
 
 
