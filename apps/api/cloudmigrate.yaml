@@ -24,25 +24,28 @@ steps:
         "--settings=config.settings.production"
       ]
 
-  - id: "collect static"
-    name: "gcr.io/google-appengine/exec-wrapper"
-    args:
-      [
-        "-i",
-        "gcr.io/$PROJECT_ID/${_SERVICE_NAME}",
-        "-s",
-        "${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME}",
-        "-e",
-        "SETTINGS_NAME=${_SECRET_SETTINGS_NAME}",
-        "--",
-        "python",
-        "manage.py",
-        "collectstatic",
-        "--verbosity",
-        "2",
-        "--no-input",
-        "--settings=config.settings.production"
-      ]
+  # TODO: Not needed everytime. Find a way to run this only when needed
+  # as it slows down the pipeline so far
+
+  # - id: "collect static"
+  #   name: "gcr.io/google-appengine/exec-wrapper"
+  #   args:
+  #     [
+  #       "-i",
+  #       "gcr.io/$PROJECT_ID/${_SERVICE_NAME}",
+  #       "-s",
+  #       "${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME}",
+  #       "-e",
+  #       "SETTINGS_NAME=${_SECRET_SETTINGS_NAME}",
+  #       "--",
+  #       "python",
+  #       "manage.py",
+  #       "collectstatic",
+  #       "--verbosity",
+  #       "2",
+  #       "--no-input",
+  #       "--settings=config.settings.production"
+  #     ]
 
 substitutions:
   _INSTANCE_NAME: taxinod
