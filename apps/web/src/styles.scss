@@ -13,6 +13,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 16px;
 }
 
 // Background utilities
@@ -32,4 +33,10 @@ mat-drawer-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+// Inputs and selects
+input,
+select {
+  font-size: 100%;
 }

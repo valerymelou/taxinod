@@ -7,118 +7,83 @@ env:
 
 on:
   push:
-    branches: [ "master", "develop" ]
-    paths-ignore: [ "docs/**" ]
+    branches: [ "master", ]
+    paths:
+      - "apps/**"
+      - "libs/**"
   pull_request:
-    branches: [ "master", "develop" ]
-    paths-ignore: [ "docs/**" ]
+    branches: [ "master" ]
+    paths:
+      - "apps/**"
+      - "libs/**"
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   services:
-  #     redis:
-  #       image: redis:6
-  #       ports:
-  #         - 6379:6379
-  #     postgres:
-  #       image: postgis/postgis:14-3.3
-  #       ports:
-  #         - 5432:5432
-  #       env:
-  #         POSTGRES_PASSWORD: postgres
-  #         POSTGRES_DB: postgres
-  #   env:
-  #     DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
-
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v3
-  #       with:
-  #         python-version: "3.9"
-  #         cache: pip
-  #         cache-dependency-path: |
-  #           apps/api/requirements/base.txt
-  #           apps/api/requirements/local.txt
-
-  #     - uses: nrwl/nx-set-shas@v3
-  #       with:
-  #         main-branch-name: master
-
-  #     - run: yarn install
-  #     - run: npx nx affected --target=install --parallel=3
-  #     - run: sudo apt-get update && sudo apt-get install binutils libproj-dev gdal-bin libgdal-dev
-
-  #     - name: Test
-  #       uses: GabrielBB/xvfb-action@v1
-  #       with:
-  #         run: |
-  #           npx nx affected --target=lint --parallel=3
-  #           npx nx affected --target=test --parallel=3 --code-coverage
-  #           npx nx affected --target=build --parallel=3
-
-  #     - name: Code Coverage
-  #       uses: codecov/codecov-action@v3
-  #       with:
-  #         token: ${{ secrets.CODECOV_TOKEN }}
-  #         files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
-  #         fail_ci_if_error: false
-
-  build_and_deploy_service:
+  test:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
-    # needs: test
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+    services:
+      redis:
+        image: redis:6
+        ports:
+          - 6379:6379
+      postgres:
+        image: postgis/postgis:14-3.3
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+    env:
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+
     steps:
       - uses: actions/checkout@v2
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          fetch-depth: 0
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
-
-      - id: 'deploy'
-        uses: 'google-github-actions/deploy-cloudrun@v0'
+      - name: Set up Python
+        uses: actions/setup-python@v3
         with:
-          service: 'taxinod-service'
-          region: ${{ secrets.GCP_DEPLOY_REGION }}
-          image: 'gcr.io/taxinod-367919/taxinod-service'
+          python-version: "3.9"
+          cache: pip
+          cache-dependency-path: |
+            apps/api/requirements/base.txt
+            apps/api/requirements/local.txt
 
-      - name: 'Build Image'
+      - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: master
+
+      - name: Install Dependancies
         run: |
-          ls -als
-          gcloud builds submit --config cloudmigrate.yaml
-        working-directory: ./apps/api
+          yarn install
+          npx nx affected --target=install --parallel=3
+          sudo apt-get update && sudo apt-get install binutils libproj-dev gdal-bin libgdal-dev
 
+      - name: Test
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: |
+            npx nx affected --target=lint --parallel=3
+            npx nx affected --target=test --parallel=3 --code-coverage
+            npx nx affected --target=build --parallel=3
 
-  # build_and_deploy_webapp:
-  #   runs-on: ubuntu-latest
-  #   if: ${{ github.event_name != 'pull_request' }}
-  #   needs: test
-  #   env:
-  #     NX_API_ROOT: '${{ secrets.API_ROOT }}'
-  #     NX_API_VERSION: '${{ secrets.API_VERSION }}'
-  #     NX_GOOGLE_MAPS_API_KEY: '${{ secrets.GOOGLE_MAPS_API_KEY }}'
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - run: yarn install && npx nx build web --configuration production --skip-nx-cache
-  #     - uses: FirebaseExtended/action-hosting-deploy@v0
-  #       with:
-  #         repoToken: '${{ secrets.GITHUB_TOKEN }}'
-  #         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-  #         channelId: live
-  #         projectId: ${{ secrets.GCP_PROJECT_ID }}
+      - name: Code Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
+          fail_ci_if_error: false
+
+  deploy_service:
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: test
+    uses: valerymelou/taxinod/.github/workflows/deploy-service.yml@master
+
+  deploy_webapp:
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: test
+    uses: valerymelou/taxinod/.github/workflows/deploy-webapp.yml@master
