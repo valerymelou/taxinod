@@ -9,9 +9,10 @@
           <mat-form-field class="w-full">
             <mat-label class="text-sm">Find the price of a taxi from</mat-label>
             <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" class="text-sm" #searchFrom>
-            <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value" aria-label="Clear">
+            <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value && !loadingFromStops" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>
+            <mat-spinner [diameter]="20" matSuffix *ngIf="loadingFromStops"></mat-spinner>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (opened)="activate()">
               <mat-option [value]="defaultStop" *ngIf="!searchFrom.value">
                 <mat-icon aria-hidden="true" fontIcon="my_location"></mat-icon> {{ defaultStop.name }}
@@ -26,9 +27,10 @@
           <mat-form-field class="w-full">
             <mat-label class="text-sm">To</mat-label>
             <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm" (input)="searchToOptions(searchTo.value)" #searchTo>
-            <button matSuffix (click)="clearField('to', $event)" *ngIf="form.get('to')?.value" aria-label="Clear">
+            <button matSuffix (click)="clearField('to', $event)" *ngIf="form.get('to')?.value && !loadingToStops" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>
+            <mat-spinner [diameter]="20" matSuffix *ngIf="loadingToStops"></mat-spinner>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSubmit()">
               <ng-container *ngFor="let option of toStops$ | async">
                 <mat-option *ngIf="option.id !== form.get('from')?.value?.id" [value]="option">

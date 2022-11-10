@@ -45,6 +45,9 @@ export class TaxiRouteSearchComponent implements OnInit {
   searchTo$ = new Subject<string>();
   paths$!: Observable<Path[]>;
 
+  loadingFromStops = false;
+  loadingToStops = false;
+
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
@@ -110,7 +113,9 @@ export class TaxiRouteSearchComponent implements OnInit {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((query: string) => {
+        this.loadingFromStops = true;
         return this.taxiStopService.getList(query).pipe(
+          finalize(() => this.loadingFromStops = false),
           map((response: Results<TaxiStop>) => {
             return response.results;
           })
@@ -124,7 +129,9 @@ export class TaxiRouteSearchComponent implements OnInit {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((query: string) => {
+        this.loadingToStops = true;
         return this.taxiStopService.getList(query).pipe(
+          finalize(() => this.loadingToStops = false),
           map((response: Results<TaxiStop>) => {
             return response.results;
           })
