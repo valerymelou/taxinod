@@ -21,7 +21,7 @@ jobs:
       NX_API_VERSION: ${{ secrets.API_VERSION }}
       NX_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: yarn install && npx nx build web --configuration production --skip-nx-cache
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
