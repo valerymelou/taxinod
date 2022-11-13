@@ -28,12 +28,6 @@ export class TaxiRouteSearchComponent implements OnInit {
 
   fromStops$: Observable<TaxiStop[]> = of([]);
   toStops$: Observable<TaxiStop[]> = of([]);
-  defaultStop: TaxiStop = {
-    id: 'current',
-    name: 'Current location',
-    longitude: 0,
-    latitude: 0
-  };
 
   active = false;
   hasResults = false;
@@ -153,7 +147,9 @@ export class TaxiRouteSearchComponent implements OnInit {
 
     this.loading = true;
     this.paths$ = this.taxiSearchService.search(filters).pipe(
-      finalize(() => this.loading = false)
+      finalize(() => {
+        this.loading = false;
+      })
     );
   }
 }

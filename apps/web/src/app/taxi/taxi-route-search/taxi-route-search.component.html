@@ -5,28 +5,25 @@
         <mat-icon aria-hidden="true" fontIcon="arrow_back_ios"></mat-icon>
       </button>
       <div class="flex flex-col flex-grow">
-        <div class="text-xs">
+        <div class="text-sm">
           <mat-form-field class="w-full">
-            <mat-label class="text-sm">Find the price of a taxi from</mat-label>
-            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" class="text-sm" #searchFrom>
+            <mat-label>Find the price of a taxi from</mat-label>
+            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" #searchFrom>
             <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value && !loadingFromStops" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>
             <mat-spinner [diameter]="20" matSuffix *ngIf="loadingFromStops"></mat-spinner>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (opened)="activate()">
-              <mat-option [value]="defaultStop" *ngIf="!searchFrom.value">
-                <mat-icon aria-hidden="true" fontIcon="my_location"></mat-icon> {{ defaultStop.name }}
-              </mat-option>
               <mat-option *ngFor="let option of fromStops$ | async" [value]="option">
                 {{option.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </div>
-        <div *ngIf="form.get('from')?.value" class="text-xs">
+        <div *ngIf="form.get('from')?.value" class="text-sm">
           <mat-form-field class="w-full">
             <mat-label class="text-sm">To</mat-label>
-            <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" class="text-sm" (input)="searchToOptions(searchTo.value)" #searchTo>
+            <input type="text" matInput formControlName="to" [matAutocomplete]="auto" placeholder="Search for a stop" (input)="searchToOptions(searchTo.value)" #searchTo>
             <button matSuffix (click)="clearField('to', $event)" *ngIf="form.get('to')?.value && !loadingToStops" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>

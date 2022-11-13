@@ -1,15 +1,17 @@
-<div *ngIf="mapReady" class="">
-  <google-map height="100%" width="100%" [options]="options" class="outline-none fixed top-0 bottom-0 left-0 right-0 sm:top-14">
+<div *ngIf="mapReady">
+  <google-map height="100%" width="100%" [options]="options" class="outline-none fixed top-0 bottom-0 left-0 right-0 sm:top-14" (mapInitialized)="mapInitialized($event)">
     <map-marker
       #marker="mapMarker"
       *ngFor="let markerPosition of markerPositions; let i = index"
       [position]="markerPosition"
       [options]="markerOptions[i]"
+      (mapClick)="showInfo(marker, i)"
     >
     </map-marker>
     <map-info-window>
-      <div *ngIf="selectedStop">
-        <h3 class="mb-3 font-bold">{{ selectedStop.name }}</h3>
+      <div *ngIf="selectedInfo" class="w-40">
+        <h3 class="mb-3 font-bold">{{ selectedInfo.name }}</h3>
+        <p>{{ selectedInfo.description }}</p>
       </div>
     </map-info-window>
   </google-map>
