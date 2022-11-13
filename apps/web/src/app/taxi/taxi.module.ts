@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SharedModule } from '../shared/shared.module';
 import { TaxiStopsResultsComponent } from './taxi-stops-results/taxi-stops-results.component';
@@ -22,6 +23,7 @@ import { TaxiRouteSearchComponent } from './taxi-route-search/taxi-route-search.
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     GoogleMapsModule,
     HttpClientModule,
     HttpClientJsonpModule,
