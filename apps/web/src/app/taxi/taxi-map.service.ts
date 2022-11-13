@@ -91,4 +91,8 @@ export class TaxiMapService {
       this.directionsRenderer.setDirections(response);
     });
   }
+
+  clearRoutes(): void {
+    this.directionsRenderer.setDirections({routes: []});
+  }
 }

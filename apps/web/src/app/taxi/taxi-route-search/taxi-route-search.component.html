@@ -8,7 +8,7 @@
         <div class="text-sm">
           <mat-form-field class="w-full">
             <mat-label>Find the price of a taxi from</mat-label>
-            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" #searchFrom>
+            <input type="text" matInput formControlName="from" [matAutocomplete]="auto" (input)="searchFromOptions(searchFrom.value)" placeholder="Search for a stop" #searchFrom (focus)="activate()">
             <button matSuffix (click)="clearField('from', $event)" *ngIf="form.get('from')?.value && !loadingFromStops" aria-label="Clear">
               <mat-icon fontIcon="close" aria-hidden="true"></mat-icon>
             </button>

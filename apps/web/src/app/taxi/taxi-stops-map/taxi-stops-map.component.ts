@@ -61,9 +61,12 @@ export class TaxiStopsMapComponent implements OnInit {
     this.markerPositions = [];
     this.markerOptions = [];
     this.stops = [];
+    this.markersMap.clear();
+    this.taxiMapService.clearRoutes();
+
     this.paths.forEach((path: Path, pathIndex: number) => {
       path.routes.forEach((route: TaxiRoute, routeIndex: number) => {
-        const last = pathIndex === this.paths.length - 1 && routeIndex === path.routes.length - 1;
+        const last = route.destination.id === path.routes[path.routes.length - 1].destination.id;
         if (!this.markersMap.has(route.origin.id)) {
           if (pathIndex === 0 && routeIndex === 0) {
             this.stopInfo.push({
@@ -75,7 +78,7 @@ export class TaxiStopsMapComponent implements OnInit {
         }
 
         if (!this.markersMap.has(route.destination.id)) {
-          if (!last) {
+          if (!last && routeIndex < path.routes.length - 1) {
             this.stopInfo.push({
               name: route.destination.name,
               description: `Stop here. Propose FCFA${path.routes[routeIndex + 1].std_price} for ${path.routes[routeIndex + 1].destination.name}.`

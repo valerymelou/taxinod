@@ -92,6 +92,10 @@ export class TaxiRouteSearchComponent implements OnInit {
   clearField(field: string, event: MouseEvent): void {
     event.stopPropagation();
     this.form.get(field)?.setValue(null);
+
+    if (field === 'from') {
+      this.deactivate();
+    }
   }
 
   searchFromOptions(query: string): void {
