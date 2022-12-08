@@ -73,14 +73,14 @@ jobs:
           files: ./coverage/apps/web/lcov.info,./apps/api/coverage.xml
           fail_ci_if_error: false
 
-  deploy-service:
-    if: ${{ github.event_name != 'pull_request' }}
-    needs: test
-    uses: valerymelou/taxinod/.github/workflows/deploy-service.yml@master
-    secrets: inherit
+  # deploy-service:
+  #   if: ${{ github.event_name != 'pull_request' }}
+  #   needs: test
+  #   uses: valerymelou/taxinod/.github/workflows/deploy-service.yml@master
+  #   secrets: inherit
 
-  deploy-webapp:
-    if: ${{ github.event_name != 'pull_request' }}
-    needs: test
-    uses: valerymelou/taxinod/.github/workflows/deploy-webapp.yml@master
-    secrets: inherit
+  # deploy-webapp:
+  #   if: ${{ github.event_name != 'pull_request' }}
+  #   needs: test
+  #   uses: valerymelou/taxinod/.github/workflows/deploy-webapp.yml@master
+  #   secrets: inherit
