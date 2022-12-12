@@ -1965,10 +1965,10 @@
     webpack "^4 || ^5"
     webpack-node-externals "^3.0.0"
 
-"@nrwl/devkit@15.2.1":
-  version "15.2.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.2.1.tgz#3907ee18d4bcb9ab36fc950c48c9cb0466ff8ab8"
-  integrity sha512-si6DK0sjtr6Ln+7hh9QD50KqxnOxuP20xJ0fxMVafT/Lz/qtxuCPw9lwJWVagMHWw3pQAtN6lbkWiLOwj8+YPA==
+"@nrwl/devkit@15.2.4":
+  version "15.2.4"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.2.4.tgz#ffcb69f462df19d3d282cf25bf346926ee23f141"
+  integrity sha512-5JZWB4ydnu+NKNIfj958nML8AWwhareQ+Q1hLXoOIS/7brqfALNP3y/Ef1ljrLIo1f3xc484TPclqwSH7aRdvQ==
   dependencies:
     "@phenomnomnominal/tsquery" "4.1.1"
     ejs "^3.1.7"
@@ -1976,10 +1976,10 @@
     semver "7.3.4"
     tslib "^2.3.0"
 
-"@nrwl/devkit@15.2.4":
-  version "15.2.4"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.2.4.tgz#ffcb69f462df19d3d282cf25bf346926ee23f141"
-  integrity sha512-5JZWB4ydnu+NKNIfj958nML8AWwhareQ+Q1hLXoOIS/7brqfALNP3y/Ef1ljrLIo1f3xc484TPclqwSH7aRdvQ==
+"@nrwl/devkit@15.3.2":
+  version "15.3.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.3.2.tgz#44ea9bc038ce87d9ea24447f6b3f3e1351a58787"
+  integrity sha512-h0MmDOjvhBJCrpXaAEK6eojpO5juaV6OEX0XjadPAQs4McxTALJxNP7Te6wIfgsY8t9WecARPIt85zKsLJeCjg==
   dependencies:
     "@phenomnomnominal/tsquery" "4.1.1"
     ejs "^3.1.7"
@@ -1998,24 +1998,6 @@
     chalk "4.1.0"
     confusing-browser-globals "^1.0.9"
     semver "7.3.4"
-
-"@nrwl/jest@15.2.1":
-  version "15.2.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-15.2.1.tgz#397ce8b528cf9af44d509e4f0b12741b1001321c"
-  integrity sha512-/lyqCeNmYmSoHDDnADuuTuooljnfxlJ8uviXUPodLGy3LaQBbxNy1vlxcg7mZqEOe1smH91TFxKq/7xDIZU9cA==
-  dependencies:
-    "@jest/reporters" "28.1.1"
-    "@jest/test-result" "28.1.1"
-    "@nrwl/devkit" "15.2.1"
-    "@phenomnomnominal/tsquery" "4.1.1"
-    chalk "4.1.0"
-    dotenv "~10.0.0"
-    identity-obj-proxy "3.0.0"
-    jest-config "28.1.1"
-    jest-resolve "28.1.1"
-    jest-util "28.1.1"
-    resolve.exports "1.1.0"
-    tslib "^2.3.0"
 
 "@nrwl/jest@15.2.4":
   version "15.2.4"
@@ -2054,18 +2036,6 @@
     source-map-support "0.5.19"
     tree-kill "1.2.2"
 
-"@nrwl/linter@15.2.1":
-  version "15.2.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-15.2.1.tgz#f7f0657bd2ff0a5eb13a6390acdfd094133ae752"
-  integrity sha512-b1+xoi6MhLdPD44rplmNbon5OyCuMpKzst50S4Xiyxdhf0fzu/w/cQDBv7zdRshE5+UMQAlDIVXF0zgEnBTQAQ==
-  dependencies:
-    "@nrwl/devkit" "15.2.1"
-    "@nrwl/jest" "15.2.1"
-    "@phenomnomnominal/tsquery" "4.1.1"
-    nx "15.2.1"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-
 "@nrwl/linter@15.2.4":
   version "15.2.4"
   resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-15.2.4.tgz#f61e25c905156c962a63df674340f8a66ac0cc5f"
@@ -2075,6 +2045,16 @@
     "@nrwl/jest" "15.2.4"
     "@phenomnomnominal/tsquery" "4.1.1"
     nx "15.2.4"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+
+"@nrwl/linter@15.3.2":
+  version "15.3.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-15.3.2.tgz#7c947ece44d964d7331795e405966da71a02318b"
+  integrity sha512-sMOgmMufH5jhsseRLipKTk7GTfW3l0edjHFj9zVo49tQmGjMeurXdIw4MkJhX23JdSc1w1JGdrqeUi10iqtMyg==
+  dependencies:
+    "@nrwl/devkit" "15.3.2"
+    "@phenomnomnominal/tsquery" "4.1.1"
     tmp "~0.2.1"
     tslib "^2.3.0"
 
