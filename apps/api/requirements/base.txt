@@ -22,4 +22,4 @@ django-map-widgets==0.4.0  # https://github.com/erdem/django-map-widgets
 
 # GCP
 google-cloud==0.34.0
-google-cloud-secret-manager==2.12.6
+google-cloud-secret-manager==2.13.0
