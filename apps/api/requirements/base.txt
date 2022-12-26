@@ -16,7 +16,7 @@ djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.13.0 # https://github.com/adamchainz/django-cors-headers
 django-modeltranslation==0.18.7  # https://django-modeltranslation.readthedocs.io/en/latest/index.html
 # DRF-spectacular for api documentation
-drf-spectacular==0.24.2  # https://github.com/tfranzel/drf-spectacular
+drf-spectacular==0.25.1  # https://github.com/tfranzel/drf-spectacular
 # Django Maps widget
 django-map-widgets==0.4.0  # https://github.com/erdem/django-map-widgets
 
