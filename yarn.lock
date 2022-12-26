@@ -1976,10 +1976,10 @@
     semver "7.3.4"
     tslib "^2.3.0"
 
-"@nrwl/devkit@15.3.2":
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.3.2.tgz#44ea9bc038ce87d9ea24447f6b3f3e1351a58787"
-  integrity sha512-h0MmDOjvhBJCrpXaAEK6eojpO5juaV6OEX0XjadPAQs4McxTALJxNP7Te6wIfgsY8t9WecARPIt85zKsLJeCjg==
+"@nrwl/devkit@15.4.1":
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.4.1.tgz#312ad812dfe6b2f9ace9f8a21b04ef10cd625392"
+  integrity sha512-6AWWXyUpoqWkVARgUeARSmFanvgqlb81GN8SBwUQhezTbalOPmi0TsUN6n7MHAc611MAFE9eZBd+29UM+sFXeg==
   dependencies:
     "@phenomnomnominal/tsquery" "4.1.1"
     ejs "^3.1.7"
@@ -2048,12 +2048,12 @@
     tmp "~0.2.1"
     tslib "^2.3.0"
 
-"@nrwl/linter@15.3.2":
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-15.3.2.tgz#7c947ece44d964d7331795e405966da71a02318b"
-  integrity sha512-sMOgmMufH5jhsseRLipKTk7GTfW3l0edjHFj9zVo49tQmGjMeurXdIw4MkJhX23JdSc1w1JGdrqeUi10iqtMyg==
+"@nrwl/linter@15.4.1":
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-15.4.1.tgz#a0a45870f30f04a805fb77db8a73b44dd023d7a3"
+  integrity sha512-bkixkG/OsSrfVAySpId7U5y34VDkpGccp0etvrqfW4SlJZpRu4u11GIKRdyJrJ8uki7m4rtK1lxi3h2KIhxeDw==
   dependencies:
-    "@nrwl/devkit" "15.3.2"
+    "@nrwl/devkit" "15.4.1"
     "@phenomnomnominal/tsquery" "4.1.1"
     tmp "~0.2.1"
     tslib "^2.3.0"
